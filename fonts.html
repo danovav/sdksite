@@ -13,20 +13,22 @@
     <aside>
         <h2>Уеб проект</h2>
 
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Покажи меню">⋮</button>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Покажи меню">☰</button>
 
         <nav>
             <ul>
-                <li><a href="index.html">Начало</a></li>
+                <li class="nav-section-start"><a href="index.html">Начало</a></li>
                 <li><a href="ai.html">AI промпт</a></li>
                 <li><a href="cyrillic.html">Българска кирилица</a></li>
-                <li><a href="about.html">За нас</a></li>
+                <li class="nav-section-start"><a href="fonts.html">Шрифтове</a></li>
+                <li><a href="cors.html">CORS</a></li>
+                <li class="nav-section-start"><a href="about.html">За нас</a></li>
             </ul>
         </nav>
     </aside>
 
     <header class="site-header" id="top">
-        <img src="logo.svg" alt="Лого на проекта" class="logo">
+        <img src="images/logo.svg" alt="Лого на проекта" class="logo">
         <div>
             <h1>Статичен уеб сайт</h1>
             <p>HTML, CSS Grid, JavaScript, адаптивен дизайн и българска кирилица</p>
@@ -152,7 +154,7 @@ body {
     </main>
 
     <footer class="site-footer">
-        Проект по дисциплината „Дизайн и публикуване в интернет“
+        Проект по дисциплината „Дизайн и публикуване в интернет“, © 2026, Вера Данова
     </footer>
 
     <a href="#top" class="back-to-top" aria-label="Върни се в началото">↑</a>

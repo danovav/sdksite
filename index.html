@@ -13,23 +13,22 @@
     <aside>
         <h2>Уеб проект</h2>
 
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Покажи меню">⋮</button>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Покажи меню">☰</button>
 
         <nav>
             <ul>
-                <li><a href="index.html">Начало</a></li>
+                <li class="nav-section-start"><a href="index.html">Начало</a></li>
                 <li><a href="ai.html">AI промпт</a></li>
                 <li><a href="cyrillic.html">Българска кирилица</a></li>
-				<li><hr></li>
-				<li><a href="fonts.html">Шрифтове</a></li>
-				<li><a href="cors.html">CORS</a></li>
-                <li><a href="about.html">За нас</a></li>
+                <li class="nav-section-start"><a href="fonts.html">Шрифтове</a></li>
+                <li><a href="cors.html">CORS</a></li>
+                <li class="nav-section-start"><a href="about.html">За нас</a></li>
             </ul>
         </nav>
     </aside>
 
     <header class="site-header" id="top">
-        <img src="logo.svg" alt="Лого на проекта" class="logo">
+        <img src="images/logo.svg" alt="Лого на проекта" class="logo">
         <div>
             <h1>Статичен уеб сайт</h1>
             <p>HTML, CSS Grid, JavaScript, адаптивен дизайн и българска кирилица</p>
@@ -46,8 +45,8 @@
                 Това е примерен уеб сайт за ученици от 11. клас:
                 как се прави статичен уеб сайт с HTML, CSS и евентуално JavaScript,
                 адаптивен дизайн и българска кирилица. 
-				Има две допълнителни теми за авторските права и лицензи на шрифтовете,
-				както и CORS за допълнителни знания.
+                Има две допълнителни теми за авторските права и лицензи на шрифтовете,
+                както и CORS за допълнителни знания.
             </p>
         </section>
 
@@ -71,9 +70,9 @@
             <h2>Как е направен сайтът</h2>
 
             <p>
-                Изполвани са CSS Grid, като сайтът е респонсив и
+                Изполвани са CSS Grid, като сайтът е адаптивен (responsive) и
                 се променя при малък екран. Изборът на шрифт е направен
-				с помощтта на Google AI и може да се види на страницата
+                с помощтта на Google AI и може да се види на страницата
                 <a href="fonts.html">Шрифтове</a>.
             </p>
 
@@ -82,21 +81,22 @@
                 защо браузърът ограничава заявки между различни домейни
                 и защо някои външни скриптове работят, когато са включени
                 чрез <code>&lt;script src="..."&gt;</code>.
-				Страницата за <a href="cors.html">CORS</a> 
-				e генерирана от Claude, Sonnet 4.6.
+                Страницата за <a href="cors.html">CORS</a> 
+                e генерирана от Claude, Sonnet 4.6.
             </p>
         </section>
 
     </main>
 
     <footer class="site-footer">
-        Проект по „Дизайн и публикуване в интернет“, 2026
+        Проект по „Дизайн и публикуване в интернет“, © 2026, Вера Данова
     </footer>
 
     <a href="#top" class="back-to-top" aria-label="Върни се в началото">↑</a>
 
 </div>
 
+<script src="script.js"></script>
 
 </body>
 </html>
