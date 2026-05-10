@@ -87,14 +87,35 @@
             <h2>Как включваме шрифт в статичен сайт?</h2>
 
             <p>
-                В този проект шрифтът е включен чрез <code>@import</code> в CSS файла:
+                В този проект шрифтът е включен чрез <code>@import</code> в CSS файла,
+				тъй като е част от библиотеката на Google Fonts:
             </p>
 
-            <div class="code">@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+            <div class="code">@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;700&family=Unbounded:wght@700;900&display=swap');
 
 body {
-    font-family: 'PT Sans', Arial, sans-serif;
+    font-family: 'Sofia Sans', Arial, sans-serif;
 }</div>
+			<p>
+                Освен това, в CSS файла е добавен и свободен шрифт, 
+				който се зарежда директно от файловете на сайта, 
+				тъй като не е част от библиотеката на Google Fonts.:
+            </p>
+
+            <div class="code">@font-face {
+    font-family: "Ruslan Display";
+    src: url("fonts/RuslanDisplay.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+.display-title {
+    font-family: "Ruslan Display", "Sofia Sans", Arial, sans-serif;
+    color: #4f5fa8;
+    letter-spacing: 0.04em;
+}
+			
+			</div>
         </section>
 
     </main>
