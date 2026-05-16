@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;700&family=Unbounded:wght@700;900&display=swap');
 
 @font-face {
-    font-family: "Ruslan Display";
-    src: url("fonts/RuslanDisplay.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Cormorant Infant';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/Cormorant_Infant/CormorantInfant-VariableFont_wght.ttf') format('truetype');
 }
+
 
 * {
     box-sizing: border-box;
@@ -22,8 +23,6 @@ body {
     -webkit-font-feature-settings: "locl";
     
     margin: 0;
-    /* font-family: 'PT Sans', Arial, sans-serif; */
-    /* font-feature-settings: "locl"; */
     background-color: #f4f6f8;
     color: #222;
     line-height: 1.6;
@@ -37,15 +36,22 @@ body {
     background: white;
 }
 
+.ext-icon {
+  width: 0.8em;
+  height: 0.8em;
+  margin-left: 4px;
+  vertical-align: text-top;
+}
+
 .site-header h1 {
-    font-family: 'Unbounded', 'Sofia Sans', Arial, sans-serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    font-family: "Unbounded";
+    /* text-transform: uppercase; */
+    letter-spacing: 0.04em;
 }
 
 .display-title {
-    font-family: "Ruslan Display", "Sofia Sans", Arial, sans-serif;
+    font-family: "Cormorant Infant";
+	/* font-weight: 900; */
     color: #4f5fa8;
     letter-spacing: 0.04em;
 }
@@ -115,6 +121,15 @@ body {
     height: auto;
     border-radius: 10px;
     display: block;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 14px;
 }
 
 aside {
@@ -191,6 +206,15 @@ main {
     border-radius: 8px;
     font-family: Consolas, "Courier New", monospace;
     white-space: pre-wrap;
+}
+
+p code {
+  background-color: #eef2ff;
+  color: #1e3a8a;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.95em;
 }
 
 button {
@@ -382,3 +406,28 @@ button:hover {
         padding: 10px 0 0;
     }
 }
+
+.ai-credit-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+  margin-bottom: 28px;
+}
+
+.ai-credit-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  padding: 28px 38px;
+  border-radius: 18px;
+  background-color: #111827;
+  color: #d1fae5;
+  box-shadow: 0 16px 36px rgba(17, 24, 39, 0.32);
+}
+
+.ai-credit-card img {
+  width: 300;
+  height: auto;
+  filter: drop-shadow(0 0 14px rgba(45, 212, 191, 0.9));
+}
+

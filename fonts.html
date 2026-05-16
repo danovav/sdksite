@@ -11,21 +11,21 @@
 <div class="page-grid">
 
     <aside>
-        <h2>Уеб проект</h2>
+	  <h2>Уеб проект</h2>
 
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Покажи меню">☰</button>
+	  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Покажи меню">☰</button>
 
-        <nav>
-            <ul>
-                <li class="nav-section-start"><a href="index.html">Начало</a></li>
-                <li><a href="ai.html">AI промпт</a></li>
-                <li><a href="cyrillic.html">Българска кирилица</a></li>
-                <li class="nav-section-start"><a href="fonts.html">Шрифтове</a></li>
-                <li><a href="cors.html">CORS</a></li>
-                <li class="nav-section-start"><a href="about.html">За нас</a></li>
-            </ul>
-        </nav>
-    </aside>
+	  <nav>
+		<ul>
+		  <li class="nav-section-start"><a href="index.html">Начало</a></li>
+		  <li><a href="ai.html">AI промпт</a></li>
+		  <li><a href="cyrillic.html">Кирилица</a></li>
+		  <li class="nav-section-start"><a href="fonts.html">Шрифтове</a></li>
+		  <li><a href="cors.html">CORS</a></li>
+		  <li class="nav-section-start"><a href="about.html">За нас</a></li>
+		</ul>
+	  </nav>
+	</aside>
 
     <header class="site-header" id="top">
         <img src="images/logo.svg" alt="Лого на проекта" class="logo">
@@ -41,12 +41,14 @@
 		<section class="card">
 		<h2>Използвани са шрифтове със свободни лицензи</h2>
 		<p>
-		Използван е шрифт Rafale BG като декоративен шрифт за заглавия. 
-		На страницата на <a href="https://localfonts.eu/freefonts/bulgarian-cyrillic/rafale-bg/">localfonts.eu</a> 
-		е посочен лиценз Fontfabric EULA Free Font License Ver. 2.0, 
-		който разрешава употреба като web-font чрез @font-face. 
-		За основния текст е използван Sofia Sans с резервни шрифтове.
+		Използвани са няколко български варианта на кирилица от библиотеката на Гугъл:
 		</p>
+		<ul>
+        <li>За заглавие на сайта безсерифен шрифт <b>Unbounded</b></li>
+		<li>За заглавия в страниците серифен шрифт <b>Cormorant Infant</b></li>
+		<li>За основния текст е използван <b>Sofia Sans</b> с резервни шрифтове.</li>
+		</ul>
+		
 		</section>
 		
 		<h2 class="page-title display-title">Популярни шрифтове от Google Fonts</h2>
@@ -67,7 +69,7 @@ font-variation-settings: 'wght' 650, 'ital' 0.5;
 				Стойността 650 е нещо, което преди просто не съществуваше — нямаше шрифт „SemiBold-and-a-bit". Сега можеш да пишеш всяко число в диапазона.
 				<br>
 				<b>Основните оси (axes), които поддържат повечето variable fonts:</b>
-
+			</p>
 				<ul>
                 <li>wght — дебелина, обикновено 100–900</li>
 				<li>ital — курсив, 0 или 1 (или плавно при някои)</li>
@@ -75,10 +77,9 @@ font-variation-settings: 'wght' 650, 'ital' 0.5;
 				<li>wdth — ширина на буквите, 75%–125%</li>
 				<li>opsz — optical size — шрифтът се оптимизира за малък или голям размер автоматично</li>
 				</ul>
-			</p>
 			
 			<p>
-			В Google Fonts почти всичко вече е variable. Зареждаш с диапазон:
+			В Google Fonts почти всичко вече е variable. Зарежда се с диапазон:
 			</p>
 			
 			<div class="code">font-family: 'Inter', sans-serif;
@@ -91,21 +92,52 @@ font-variation-settings: 'wght' 650, 'ital' 0.5;
         </section>
 
         <section class="card">
-            <h2>Имам ли право да ползвам този шрифт @import url('https://fonts.googleapis.com/css2</h2>
+            <h2>Имам ли право да ползвам този шрифт @import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant');</h2>
 
             <p>
-                Да, имате пълното право да ползвате PT Sans за вашия дипломен проект и за училище. Той е част от библиотеката на Google Fonts и е лицензиран под SIL Open Font License (OFL), което означава, че е напълно безплатен за лична, образователна и търговска употреба.
+                Да, имате пълното право да ползвате Cormorant Infant за вашия дипломен проект и за училище. 
+				Шрифтът Cormorant Infant е част от голямата отворена фамилия Cormorant, разработена от дизайнера Christian Thalmann. 
+				Той се разпространява официално под същия свободен лиценз SIL Open Font License (OFL) 1.1 в платформата Google Fonts.
+				Можете да го вграждате в комерсиални уебсайтове, онлайн магазини, блогове, лога, рекламни банери и печатни издания безплатно и без да дължите авторски права.
             </p>
-
+			
+			
+			<h3>Важно изключение ( GDPR съображение )</h3>
+			<p>				
+				Въпреки че шрифтът е безплатен, директното му импортиране от сървърите на Google (както правите с @import) 
+				може да наруши правилата на GDPR в Европейския съюз. 
+				Когато потребител зареди сайта ви, неговият браузър изпраща заявка към Google, за да изтегли шрифта, 
+				споделяйки IP адреса на потребителя без неговото предварително съгласие.
+			</p>
+			
+			<h3>За да сте напълно изрядни пред европейското законодателство (GDPR), е силно препоръчително да го свалите и хоствате локално.</h3>
+			<p>	
+				Отидете на страницата на Cormorant Infant в Google Fonts.
+				Изтеглете файловете на шрифта на вашия компютър (бутон Download family).
+				Качете файловете (най-добре във формат .woff2) директно на вашия хостинг сървър.
+				Свържете ги в CSS файла си локално чрез @font-face.
+			</p>
+			
+			<p>
+				Повече информация тук  <a href="https://developers.google.com/fonts/faq" target="_blank" rel="noopener noreferrer">
+					https://developers.google.com/fonts/faq<img src="images/external-link.svg" alt="Отвори в нов таб" class="ext-icon"></a>
+			</p>
         </section>
 
         <section class="card">
             <h2>Откъде можем да намерим подходящи шрифтове?</h2>
 
             <ul>
-                <li>Google Fonts</li>
-                <li>localfonts.eu</li>
-                <li>1001fonts.com</li>
+                <li>Google Fonts - избираме от <a href="https://fonts.google.com" target="_blank" rel="noopener noreferrer">
+					https://fonts.google.com<img src="images/external-link.svg" alt="Отвори в нов таб" class="ext-icon"></a>
+					<br>
+					например: Sofia Sans, Cormorant Infant, Montserrat Alternates, Mark Script, Pattaya са български варианти на кирилица</li>
+                <li><a href="https://1001fonts.com" target="_blank" rel="noopener noreferrer">
+					1001fonts.com<img src="images/external-link.svg" alt="Отвори в нов таб" class="ext-icon"></a> - Thorn Valley, Lemon Tuesday, Wolgast Two, Dihjauti, Veleka ...</li>
+				<li>localfonts.eu - <a href="https://localfonts.eu/shop/cyrillic-script/bulgarian/bulgarian-cyrillic-sans-serif/repo/" target="_blank" rel="noopener noreferrer">
+					Repo<img src="images/external-link.svg" alt="Отвори в нов таб" class="ext-icon"></a>,
+					<a href="https://localfonts.eu/shop/cyrillic-script/serbian/serbian-cyrillic-serif/libra-serif-modern/" target="_blank" rel="noopener noreferrer">
+					Libra Serif Modern<img src="images/external-link.svg" alt="Отвори в нов таб" class="ext-icon"></a> и др.</li>
             </ul>
 
             <p>
@@ -114,12 +146,12 @@ font-variation-settings: 'wght' 650, 'ital' 0.5;
                 разпространява публично като част от проект.
             </p>
 			
-			<div class="code">/* Вмъкване на Sofia Sans с поддръжка на българска кирилица */
-@import url('https://googleapis.com');
+			<div class="code">/* Вмъкване на Sofia Sans с поддръжка на български вариант на кирилица */
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans');
 
 body {
     font-family: 'Sofia Sans', sans-serif;
-    /* Важно: Този ред активира българските форми в браузъра */
+    /* Този ред активира българските форми в браузъра за всеки случай */
     font-variant-ligatures: common-ligatures;
     -webkit-font-feature-settings: "locl";
     font-feature-settings: "locl";
@@ -128,26 +160,23 @@ body {
         </section>
 
         <section class="card">
-            <h2>Относно адреса googleapis.com - може да се ползва за шрифтове напълно свободно</h2>
+            <h2>Относно адреса fonts.googleapis.com - може да се ползва за шрифтове напълно свободно</h2>
 
             <p>
-                Това е официалният сървър на Google, от който браузърите теглят шрифтовете. Всички шрифтове, които се намират в библиотеката на Google Fonts, са с отворен лиценз (най-често OFL). Това означава, че:
+                Това е официалният сървър на Google, от който браузърите теглят шрифтовете. 
+				Всички шрифтове, които се намират в библиотеката на Google Fonts, са с отворен лиценз (най-често OFL). Това означава, че:
+			</p>
 				<ul>
                 <li>Можете да ги ползвате в лични и комерсиални проекти.</li>
                 <li>Можете да ги показвате в училище и в дипломни работи.</li>
                 <li>Няма да имате проблеми с авторски права.</li>
 				</ul>
-            </p>
 
         </section>
 		
 		<p>
-		Генерирани отговори от Google AI
-		</p>
-		<p>
-		Добре е да се провери кое от горните е вярно, тъй като до последно Google AI предлагаше да се ползва
-		<pre>@import url('https://googleapis.com');</pre>
-		а всъщност сработи с предложеното от ChatGPT:</p>
+		Генерирани отговори от Google AI и ChatGPT. Добре е да се проверява кое е вярно, тъй като Google AI настояваше да се ползва
+		<code>@import url('https://googleapis.com');</code>, а всъщност работи предложеното от ChatGPT:</p>
 		
 		<div class="code">@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;700&display=swap');</div>
 		

@@ -11,21 +11,21 @@
 <div class="page-grid">
 
     <aside>
-        <h2>Уеб проект</h2>
+	  <h2>Уеб проект</h2>
 
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Покажи меню">☰</button>
+	  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Покажи меню">☰</button>
 
-        <nav>
-            <ul>
-                <li class="nav-section-start"><a href="index.html">Начало</a></li>
-                <li><a href="ai.html">AI промпт</a></li>
-                <li><a href="cyrillic.html">Българска кирилица</a></li>
-                <li class="nav-section-start"><a href="fonts.html">Шрифтове</a></li>
-                <li><a href="cors.html">CORS</a></li>
-                <li class="nav-section-start"><a href="about.html">За нас</a></li>
-            </ul>
-        </nav>
-    </aside>
+	  <nav>
+		<ul>
+		  <li class="nav-section-start"><a href="index.html">Начало</a></li>
+		  <li><a href="ai.html">AI промпт</a></li>
+		  <li><a href="cyrillic.html">Кирилица</a></li>
+		  <li class="nav-section-start"><a href="fonts.html">Шрифтове</a></li>
+		  <li><a href="cors.html">CORS</a></li>
+		  <li class="nav-section-start"><a href="about.html">За нас</a></li>
+		</ul>
+	  </nav>
+	</aside>
 
     <header class="site-header" id="top">
         <img src="images/logo.svg" alt="Лого на проекта" class="logo">
@@ -36,7 +36,7 @@
     </header>
 
     <main>
-        <h2 class="page-title">Българска форма на кирилицата</h2>
+        <h2 class="page-title display-title">Българска форма на кирилицата</h2>
 
         <section class="card">
             <h2>Какво означава това?</h2>
@@ -97,20 +97,20 @@ body {
     font-family: 'Sofia Sans', Arial, sans-serif;
 }</div>
 			<p>
-                Освен това, в CSS файла е добавен и свободен шрифт, 
-				който се зарежда директно от файловете на сайта, 
-				тъй като не е част от библиотеката на Google Fonts.:
+                Освен това, в CSS файла е добавен и свободен шрифт от библиотеката на Гугъл,
+				който се зарежда директно от файловете на сайта като пример за правилното ползване заради GDPR (според Google AI).
+				По този начин се ползват и други шрифтове, чиито source файл е качен на нашия сървър.
             </p>
 
             <div class="code">@font-face {
-    font-family: "Ruslan Display";
-    src: url("fonts/RuslanDisplay.ttf") format("truetype");
+    font-family: "Cormorant Infant";
+	src: url('fonts/Cormorant_Infant/CormorantInfant-VariableFont_wght.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 .display-title {
-    font-family: "Ruslan Display", "Sofia Sans", Arial, sans-serif;
+    font-family: "Cormorant Infant";
     color: #4f5fa8;
     letter-spacing: 0.04em;
 }
