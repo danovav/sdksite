@@ -82,7 +82,7 @@ font-variation-settings: 'wght' 650, 'ital' 0.5;
 			В Google Fonts почти всичко вече е variable. Зарежда се с диапазон:
 			</p>
 			
-			<div class="code">font-family: 'Inter', sans-serif;
+			<div class="code">font-family: 'Sofia Sans', sans-serif;
 /* wght 100..900 */</div>
 
 			<p>
@@ -105,7 +105,7 @@ font-variation-settings: 'wght' 650, 'ital' 0.5;
 			<h3>Важно изключение ( GDPR съображение )</h3>
 			<p>				
 				Въпреки че шрифтът е безплатен, директното му импортиране от сървърите на Google (както правите с @import) 
-				може да наруши правилата на GDPR в Европейския съюз. 
+				<b>може да наруши*</b> правилата на GDPR в Европейския съюз. 
 				Когато потребител зареди сайта ви, неговият браузър изпраща заявка към Google, за да изтегли шрифта, 
 				споделяйки IP адреса на потребителя без неговото предварително съгласие.
 			</p>
@@ -122,6 +122,15 @@ font-variation-settings: 'wght' 650, 'ital' 0.5;
 				Повече информация тук  <a href="https://developers.google.com/fonts/faq" target="_blank" rel="noopener noreferrer">
 					https://developers.google.com/fonts/faq<img src="images/external-link.svg" alt="Отвори в нов таб" class="ext-icon"></a>
 			</p>
+			
+			<div class="note-end">
+				<div class="note-rule"></div>
+				<strong>*Забележка:</strong> GDPR ситуацията с Google Fonts е нюансирана. 
+				Има реални съдебни решения в Германия (2022) <a href="https://aigner-business-solutions.com/en/blog/damages-due-to-unlawful-integration-of-google-fonts-guide-beyond-the-individual-case/" target="_blank" rel="noopener noreferrer"><img src="images/external-link.svg" alt="Отвори в нов таб" class="ext-icon"></a> срещу директното зареждане от <code>googleapis.com</code>, 
+				тъй като IP адресът на потребителя се изпраща към Google 
+				без изрично съгласие, а IP адресът представлява лични данни. Въпреки това не е категорична забрана в целия ЕС — зависи от 
+				тълкуването на местните регулатори, затова е използвана формулировката „може да наруши" като по-точна от „нарушава".
+			</div>
         </section>
 
         <section class="card">
@@ -174,12 +183,14 @@ body {
 
         </section>
 		
-		<p>
-		Генерирани отговори от Google AI и ChatGPT. Добре е да се проверява кое е вярно, тъй като Google AI настояваше да се ползва
-		<code>@import url('https://googleapis.com');</code>, а всъщност работи предложеното от ChatGPT:</p>
-		
-		<div class="code">@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;700&display=swap');</div>
-		
+		<div class="note-end">
+			<div class="note-rule"></div>
+			Генерирани отговори и проверени за грешки от Google AI, ChatGPT; Claude / Sonnet 4.6.<br>
+			Google AI настояваше да се ползва
+			<code>@import url('https://googleapis.com');</code>, но работещият вариант е предложен от ChatGPT:<br>
+			<code>@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;700&display=swap');</code>
+			За сега се налага да бъдат проверени нещата и от човек.
+		</div>
     </main>
 
     <footer class="site-footer">

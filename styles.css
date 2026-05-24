@@ -43,6 +43,10 @@ body {
   vertical-align: text-top;
 }
 
+.ext-icon-white {
+  color: white;
+}
+
 .site-header h1 {
     font-family: "Unbounded";
     /* text-transform: uppercase; */
@@ -431,3 +435,13 @@ button:hover {
   filter: drop-shadow(0 0 14px rgba(45, 212, 191, 0.9));
 }
 
+.note-end {
+	margin-top: 32px; 
+	padding-top: 16px;
+}
+
+.note-rule {
+    width: 200px;
+    border-top: 1px solid #ccc;
+    margin-bottom: 16px;
+}
