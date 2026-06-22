@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Typing Defender — BG / EN / DE</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#06060f;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;padding:20px;font-family:monospace}
+#gw{font-family:monospace;background:#0a0a1a;color:#e0e0ff;width:100%;max-width:700px;position:relative;overflow:hidden;border-radius:8px;user-select:none}
+#cv{display:block;width:100%}
+#ia{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;width:90%;max-width:500px}
+#wi{flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(100,180,255,0.4);border-radius:6px;color:#fff;font-family:monospace;font-size:18px;padding:8px 14px;outline:none}
+#wi:focus{border-color:rgba(100,180,255,0.9)}
+#sb{position:absolute;top:8px;left:0;right:0;display:flex;justify-content:space-between;padding:0 16px;font-size:13px;color:#aac;pointer-events:none}
+#ov{position:absolute;inset:0;background:rgba(5,5,20,0.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+#ov h2{font-size:26px;color:#7af;letter-spacing:2px;font-family:monospace}
+#ov p{color:#99b;font-size:14px;text-align:center;max-width:340px;line-height:1.6}
+.sbtn{background:rgba(100,180,255,0.15);border:1px solid rgba(100,180,255,0.5);color:#7af;font-family:monospace;font-size:15px;padding:10px 28px;border-radius:6px;cursor:pointer;letter-spacing:1px;transition:background 0.15s}
+.sbtn:hover{background:rgba(100,180,255,0.28)}
+#lang-btns{display:flex;gap:8px;margin-bottom:4px}
+.lbtn{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.2);color:#99b;font-family:monospace;font-size:13px;padding:6px 16px;border-radius:5px;cursor:pointer;transition:all 0.15s}
+.lbtn:hover{background:rgba(255,255,255,0.14)}
+.lbtn.active{background:rgba(100,180,255,0.2);border-color:rgba(100,180,255,0.6);color:#7af}
+#hint{font-size:12px;color:#668;text-align:center}
+</style>
+</head>
+<body>
+<div id="gw">
+  <canvas id="cv"></canvas>
+  <div id="sb">
+    <span id="sc">Точки: 0</span>
+    <span id="lv">Ниво: 1</span>
+    <span id="li">♥ ♥ ♥</span>
+  </div>
+  <div id="ia">
+    <input id="wi" type="text" placeholder="Пиши тук..." autocomplete="off" spellcheck="false" disabled />
+  </div>
+  <div id="ov">
+    <h2>⌨ TYPING DEFENDER</h2>
+    <div id="lang-btns">
+      <button class="lbtn active" data-lang="bg">🇧🇬 Български</button>
+      <button class="lbtn" data-lang="en">🇬🇧 English</button>
+      <button class="lbtn" data-lang="de">🇩🇪 Deutsch</button>
+    </div>
+    <p id="desc">Думи падат отгоре. Напиши правилно дума и натисни Enter — крепостта стреля!</p>
+    <p id="hint">Използвай клавиатурата на избрания език от системата</p>
+    <button class="sbtn" id="stbtn">▶ СТАРТ</button>
+  </div>
+</div>
+
+<script>
+const LANGS = {
+  bg: {
+    words: ['ябълка','маса','книга','вода','слънце','огън','вятър','земя','море','небе',
+            'риба','птица','куче','котка','кон','вълк','мечка','лисица','заек','елен',
+            'дърво','цвете','трева','гора','поле','река','езеро','хълм','камък','пясък',
+            'хляб','мляко','сирене','масло','мед','захар','сол','пипер','лук','чесън',
+            'ябълка','круша','слива','вишна','малина','ягода','череша','праскова','грозде','лимон',
+            'червен','зелен','жълт','син','бял','черен','сив','кафяв','розов','лилав',
+            'голям','малък','бърз','бавен','силен','слаб','висок','нисък','нов','стар',
+            'писане','четене','скок','бяг','плуване','пеене','танц','смях','сън','игра',
+			'маратон','задръстване','хеликоптер','динозавър','прокрастинация','гюрултия','конституция',
+			'дисциплина','територия','архитектура','ентусиазъм','температура','информация','приключение','юрисконсулт','цветница'],
+    placeholder:'Пиши тук...',score:'Точки',level:'Ниво',start:'▶ СТАРТ',
+    desc:'Думи падат отгоре. Напиши правилно и натисни Enter — крепостта стреля!',
+    hint:'Превключи на Български (BG) клавиатура',gameover:'КРАЙ',victory:'ПОБЕДА',newgame:'▶ НОВА ИГРА'
+  },
+  en: {
+    words: ['apple','brave','cloud','dance','eagle','flame','grace','heart','image','jolly',
+            'knife','lucky','magic','night','ocean','piano','queen','river','solar','tiger',
+            'uncle','voice','water','youth','zebra','angel','blast','candy','dream','enter',
+            'frost','globe','happy','input','jumpy','kitty','light','mouse','novel','orbit',
+            'plant','quick','rocky','snake','table','ultra','valid','witch','extra','young',
+            'arrow','bench','climb','dusty','faith','grant','honey','ivory','jewel','karma',
+            'laser','metal','nerve','ozone','pixel','quiet','rally','spark','touch','vapor',
+            'waste','xenon','yacht','zeros','block','chess','delay','floor','glaze','hinge',
+            'joker','kneel','layer','merge','proof','qualm','rogue','stamp','trend','upend',
+			'accommodation','adventure','architecture','celebration','communication',
+			'competition','concentration','constitution','conversation','cooperation',
+			'destination','development','electricity','entertainment','environment',
+			'examination','friendship','helicopter','imagination','information',
+			'inspiration','instruction','intelligence','journalist','mathematics',
+			'organization','passenger','playground','presentation','programming',
+			'pronunciation','procrastination','qualification','relationship',
+			'responsibility','satisfaction','temperature','transportation', 'university','vacation','volunteer'],
+    placeholder:'Type here...',score:'Score',level:'Level',start:'▶ START',
+    desc:'Words fall from above. Type a word correctly and press Enter — the castle fires!',
+    hint:'Switch to English (EN) keyboard layout',gameover:'GAME OVER',victory:'VICTORY',newgame:'▶ NEW GAME'
+  },
+  de: {
+    words: ['Apfel','Baum','Dach','Erde','Feuer','Gabel','Haus','Insel','Jagd','Käse',
+            'Lampe','Messer','Nacht','Ofen','Pferd','Quelle','Regen','Schuh','Tisch','Uhr',
+            'Vogel','Wasser','Flugzeug','Yacht','Zucker','Bäcker','Löffel','Mütze','Öfen','Tür',
+            'Auge','Blume','Clown','Donner','Elch','Fuchs','Grün','Hügel','Igel','Jäger',
+            'Küche','Löwe','Mauer','Nuss','Ochse','Pfanne','Quark','Rübe','Straße','Tasse',
+            'Übung','Vieh','Wolke','Xylophon','Zahn','Äste','Öl','Bach','Eimer',
+            'Falke','Gänse','Herd','Imker','Käfig','Lärm','Möwe','Nähte','Säge',
+            'Täler','Würze','Zähne','Bügel','Föhn','Höhe','Kürze','Mönch','Nöte',
+			'Fenster','Garten', 'Schmetterling','Fahrrad','Sommer','Winter','Flugbegleiterin','Abflug'],
+    placeholder:'Hier tippen...',score:'Punkte',level:'Stufe',start:'▶ START',
+    desc:'Wörter fallen von oben. Tippe ein Wort richtig und drücke Enter — die Burg schießt!',
+    hint:'Schalte auf Deutsch (DE) Tastatur um',gameover:'SPIEL VORBEI',victory:'SIEG',newgame:'▶ NEUES SPIEL'
+  }
+};
+
+const cv=document.getElementById('cv');
+const ctx=cv.getContext('2d');
+const wrap=document.getElementById('gw');
+const inp=document.getElementById('wi');
+const ov=document.getElementById('ov');
+const scEl=document.getElementById('sc');
+const lvEl=document.getElementById('lv');
+const liEl=document.getElementById('li');
+
+let W,H,running=false,lang='bg';
+let words=[],particles=[],missiles=[],explosions=[];
+let score=0,lives=3,level=1,spawnTimer=0,frameCount=0;
+let castles=[];
+
+document.querySelectorAll('.lbtn').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('.lbtn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    lang=b.dataset.lang;
+    const L=LANGS[lang];
+    document.getElementById('desc').textContent=L.desc;
+    document.getElementById('hint').textContent=L.hint;
+    document.getElementById('stbtn').textContent=L.start;
+    inp.placeholder=L.placeholder;
+  };
+});
+
+function resize(){
+  const r=wrap.getBoundingClientRect();
+  W=r.width||680;
+  H=Math.max(500,Math.min(600,window.innerHeight*0.8));
+  cv.width=W;cv.height=H;
+  wrap.style.minHeight=(H+50)+'px';
+}
+
+class FallingWord{
+  constructor(){
+    const L=LANGS[lang];
+    this.word=L.words[Math.floor(Math.random()*L.words.length)];
+    this.x=40+Math.random()*(W-120);
+    this.y=-24;
+    this.speed=0.35+Math.random()*0.25+(level-1)*0.07;
+    this.color=`hsl(${180+Math.random()*80},70%,72%)`;
+    this.typed=0;
+    this.wobble=Math.random()*Math.PI*2;
+  }
+  update(){this.y+=this.speed;this.wobble+=0.03;}
+  draw(){
+    const wx=this.x+Math.sin(this.wobble)*2;
+    ctx.font='bold 15px monospace';
+    const typed=this.word.slice(0,this.typed);
+    const rest=this.word.slice(this.typed);
+    const tw=ctx.measureText(this.word).width;
+    let cx=wx-tw/2;
+    ctx.fillStyle='#4fc';ctx.fillText(typed,cx,this.y);
+    cx+=ctx.measureText(typed).width;
+    ctx.fillStyle=this.color;ctx.fillText(rest,cx,this.y);
+    ctx.strokeStyle='rgba(100,200,255,0.12)';
+    ctx.strokeRect(wx-tw/2-4,this.y-14,tw+8,18);
+  }
+}
+
+class Missile{
+  constructor(sx,sy,tx,ty){
+    this.x=sx;this.y=sy;this.tx=tx;this.ty=ty;
+    const dx=tx-sx,dy=ty-sy,d=Math.sqrt(dx*dx+dy*dy);
+    this.vx=dx/d*9;this.vy=dy/d*9;this.done=false;
+  }
+  update(){
+    this.x+=this.vx;this.y+=this.vy;
+    if(Math.sqrt((this.tx-this.x)**2+(this.ty-this.y)**2)<12)this.done=true;
+  }
+  draw(){
+    ctx.save();ctx.translate(this.x,this.y);
+    ctx.rotate(Math.atan2(this.vy,this.vx));
+    ctx.fillStyle='#ff9';ctx.fillRect(-6,-2,12,4);
+    ctx.fillStyle='#fa5';ctx.fillRect(-10,-1,4,2);
+    ctx.restore();
+  }
+}
+
+class Particle{
+  constructor(x,y,ch){
+    this.x=x;this.y=y;this.ch=ch;
+    this.vx=(Math.random()-.5)*5;this.vy=-Math.random()*4-1;
+    this.life=1;this.decay=0.025+Math.random()*0.02;
+    this.color=`hsl(${30+Math.random()*60},90%,65%)`;
+  }
+  update(){this.x+=this.vx;this.y+=this.vy;this.vy+=0.12;this.life-=this.decay;}
+  draw(){
+    ctx.globalAlpha=Math.max(0,this.life);
+    ctx.fillStyle=this.color;ctx.font='13px monospace';
+    ctx.fillText(this.ch,this.x,this.y);ctx.globalAlpha=1;
+  }
+}
+
+class Explosion{
+  constructor(x,y){this.x=x;this.y=y;this.r=2;this.life=1;}
+  update(){this.r+=3;this.life-=0.07;}
+  draw(){
+    ctx.globalAlpha=Math.max(0,this.life*0.6);
+    ctx.strokeStyle='#fa5';ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.stroke();
+    ctx.globalAlpha=Math.max(0,this.life*0.25);
+    ctx.fillStyle='#ff9';ctx.beginPath();ctx.arc(this.x,this.y,this.r*.5,0,Math.PI*2);ctx.fill();
+    ctx.globalAlpha=1;
+  }
+}
+
+function buildCastles(){
+  castles=[];
+  const n=3,cw=Math.floor(W/(n+1));
+  for(let i=0;i<n;i++)castles.push({x:Math.round(cw*(i+1)),hp:3,maxHp:3});
+}
+
+function drawCastle(c){
+  if(c.hp<=0)return;
+  const bx=c.x,by=H-70;
+  const full=['  ╔╦╗  ','  ╠╬╣  ','╔═╩╩╩═╗','║█████║','╚══╤══╝'];
+  const dmg= ['  ╔╦╗  ','  ╠╬╣  ','╔═╩╩╩═╗','║▓░▓▒▓║','╚══╤══╝'];
+  const use=c.hp<2?dmg:full;
+  ctx.font='11px monospace';
+  const a=c.hp/c.maxHp;
+  ctx.fillStyle=a>.6?'#6af':a>.3?'#fa6':'#f66';
+  use.forEach((line,i)=>{
+    const lw=ctx.measureText(line).width;
+    ctx.fillText(line,bx-lw/2,by+i*12);
+  });
+  for(let h=0;h<c.hp;h++){ctx.fillStyle='#f55';ctx.fillText('♥',bx-16+h*13,by+75);}
+}
+
+function fireAt(word){
+  let best=null,bd=Infinity;
+  castles.forEach(c=>{if(c.hp>0&&Math.abs(c.x-word.x)<bd){bd=Math.abs(c.x-word.x);best=c;}});
+  if(best)missiles.push(new Missile(best.x,H-80,word.x,word.y));
+}
+
+function explodeWord(word){
+  explosions.push(new Explosion(word.x,word.y));
+  for(let i=0;i<14;i++){
+    const ch=word.word[Math.floor(Math.random()*word.word.length)];
+    particles.push(new Particle(word.x,word.y,ch));
+  }
+  score+=word.word.length*10*level;
+  scEl.textContent=LANGS[lang].score+': '+score;
+  if(score>=level*600){level++;lvEl.textContent=LANGS[lang].level+': '+level;}
+}
+
+function updateLives(){
+  liEl.innerHTML='♥ '.repeat(lives).trim()+' '+'♡ '.repeat(Math.max(0,3-lives)).trim();
+  liEl.style.color=lives>1?'#f88':'#f33';
+}
+
+function checkInput(){
+  const val=inp.value.trim();
+  if(!val)return;
+  for(let i=0;i<words.length;i++){
+    if(words[i].word.toLowerCase()===val.toLowerCase()||words[i].word===val){
+      fireAt(words[i]);
+      const w=words.splice(i,1)[0];
+      setTimeout(()=>explodeWord(w),200);
+      inp.value='';words.forEach(x=>x.typed=0);return;
+    }
+  }
+  for(let i=0;i<words.length;i++){
+    if(words[i].word.toLowerCase().startsWith(val.toLowerCase())||words[i].word.startsWith(val))
+      words[i].typed=val.length;
+    else words[i].typed=0;
+  }
+}
+
+function gameOver(won){
+  running=false;inp.disabled=true;
+  const L=LANGS[lang];
+  ov.style.display='flex';
+  ov.innerHTML=`
+    <h2 style="color:${won?'#4fc':'#f55'}">${won?'🏆 '+L.victory:'💀 '+L.gameover}</h2>
+    <p style="font-size:20px;color:#fff">${L.score}: <b style="color:#fa5">${score}</b> &nbsp; ${L.level}: <b style="color:#7af">${level}</b></p>
+    <button class="sbtn" id="rb">${L.newgame}</button>`;
+  document.getElementById('rb').onclick=startGame;
+}
+
+function startGame(){
+  words=[];particles=[];missiles=[];explosions=[];
+  score=0;lives=3;level=1;spawnTimer=0;frameCount=0;
+  const L=LANGS[lang];
+  scEl.textContent=L.score+': 0';
+  lvEl.textContent=L.level+': 1';
+  updateLives();buildCastles();
+  ov.style.display='none';
+  inp.disabled=false;inp.placeholder=L.placeholder;inp.value='';inp.focus();
+  running=true;requestAnimationFrame(loop);
+}
+
+function loop(){
+  if(!running)return;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#0a0a1a';ctx.fillRect(0,0,W,H);
+  frameCount++;spawnTimer++;
+  const sr=Math.max(55,140-level*9);
+  if(spawnTimer>=sr){if(words.length<6+level)words.push(new FallingWord());spawnTimer=0;}
+  castles.forEach(drawCastle);
+  const gy=H-30;
+  ctx.fillStyle='rgba(80,130,200,0.15)';ctx.fillRect(0,gy,W,4);
+  words=words.filter(w=>{
+    w.update();
+    if(w.y>gy){
+      explosions.push(new Explosion(w.x,gy));
+      castles.forEach(c=>{if(c.hp>0&&Math.abs(c.x-w.x)<60)c.hp--;});
+      lives--;updateLives();
+      if(lives<=0){gameOver(false);return false;}
+      return false;
+    }
+    w.draw();return true;
+  });
+  missiles=missiles.filter(m=>{m.update();m.draw();return!m.done;});
+  explosions=explosions.filter(e=>{e.update();e.draw();return e.life>0;});
+  particles=particles.filter(p=>{p.update();p.draw();return p.life>0;});
+  if(castles.every(c=>c.hp<=0)){gameOver(false);return;}
+  requestAnimationFrame(loop);
+}
+
+inp.addEventListener('input',checkInput);
+inp.addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    const val=inp.value.trim();
+    for(let i=0;i<words.length;i++){
+      if(words[i].word.toLowerCase()===val.toLowerCase()||words[i].word===val){
+        fireAt(words[i]);
+        const w=words.splice(i,1)[0];
+        setTimeout(()=>explodeWord(w),200);
+        inp.value='';words.forEach(x=>x.typed=0);return;
+      }
+    }
+    inp.value='';words.forEach(x=>x.typed=0);
+  }
+});
+
+document.getElementById('stbtn').onclick=startGame;
+resize();buildCastles();
+window.addEventListener('resize',()=>{resize();if(!running)buildCastles();});
+</script>
+</body>
+</html>
