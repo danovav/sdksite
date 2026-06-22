@@ -20,8 +20,9 @@
 		  <li class="nav-section-start"><a href="index.html">Начало</a></li>
 		  <li><a href="ai.html">AI промпт</a></li>
 		  <li><a href="cyrillic.html">Кирилица</a></li>
-		  <li class="nav-section-start"><a href="fonts.html">Шрифтове</a></li>
-		  <li><a href="cors.html">CORS</a></li>
+		  <li><a href="fonts.html">Шрифтове</a></li>
+		  <li class="nav-section-start"><a href="cors.html">CORS</a></li>
+		  <li><a href="game.html">Typing Defender</a></li>
 		  <li class="nav-section-start"><a href="about.html">За нас</a></li>
 		</ul>
 	  </nav>
@@ -49,8 +50,11 @@
             </p>
 
             <p>
-                За да може браузърът да избере правилните локализирани форми,
-                в HTML документа е зададено <code>lang="bg"</code>.
+                За да може браузърът да използва българските форми на буквите,
+                в HTML документа е зададен атрибутът <code>lang="bg"</code>.
+				Когато използваният шрифт поддържа българска локализация, браузърът може автоматично да избере съответните форми.
+				Някои шрифтове използват българските форми по подразбиране, докато при други те се активират чрез OpenType функции и локализацията на езика.
+				Трети шрифтове изобщо не поддържат българска форма на кирилицата.
             </p>
         </section>
 
@@ -116,6 +120,14 @@ body {
 }
 			
 			</div>
+        </section>
+		
+		<section class="card">
+            <p>
+                Още за българската форма на кирилицата можете да прочетете тук 
+				<a href="https://medium.com/@mevbg/bulgarian-cyrillic-on-the-web-techniques-for-authentic-font-rendering-bec82c24e39f">Българска кирилица в интернет</a>
+				и тук <a href="https://cyrillic.bg/manifest/">Манифест на инициативата</a>
+            </p>
         </section>
 
     </main>
