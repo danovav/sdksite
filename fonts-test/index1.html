@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RaliBulgarianLight — Font Test</title>
+  <style>
+    @font-face {
+      font-family: 'RaliBulgarianLight';
+      src: url('fonts1/RaliBulgarianLight.woff2') format('woff2'),
+           url('fonts1/RaliBulgarianLight.woff')  format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, serif;
+      background: #fafaf8;
+      color: #222;
+      padding: 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    h1 { font-size: 1.1rem; font-weight: normal; color: #888; margin-bottom: 2rem; letter-spacing: .04em; }
+
+    .rali { font-family: 'RaliBulgarianLight', cursive; }
+
+    .block {
+      background: #fff;
+      border: 1px solid #e8e8e4;
+      border-radius: 6px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #aaa;
+      margin-bottom: 0.6rem;
+    }
+
+    .alphabet    { font-size: 2.2rem; line-height: 1.9; }
+    .cyrillic    { font-size: 2.2rem; line-height: 1.9; }
+    .digits-row  { font-size: 2.8rem; line-height: 1.6; letter-spacing: .06em; }
+    .punct-row   { font-size: 2.4rem; line-height: 1.6; }
+
+    .size-row { display: flex; flex-direction: column; gap: .3rem; }
+    .s12 { font-size: 12px; }
+    .s16 { font-size: 16px; }
+    .s24 { font-size: 24px; }
+    .s36 { font-size: 36px; }
+    .s48 { font-size: 48px; }
+    .s72 { font-size: 72px; line-height: 1.2; }
+
+    .sentence { font-size: 2rem; line-height: 1.8; }
+    .sentence-bg { font-size: 2rem; line-height: 1.8; }
+
+    .mixed { font-size: 1.8rem; line-height: 1.9; }
+
+    textarea.custom {
+      font-family: 'RaliBulgarianLight', cursive;
+      font-size: 2rem;
+      width: 100%;
+      border: none;
+      outline: none;
+      resize: vertical;
+      background: transparent;
+      line-height: 1.8;
+      color: #222;
+      min-height: 100px;
+    }
+
+    .size-label {
+      font-size: 0.65rem;
+      color: #bbb;
+      min-width: 2.5rem;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<h1>RaliBulgarianLight &nbsp;·&nbsp; Font Preview</h1>
+
+<!-- Latin alphabet -->
+<div class="block">
+  <div class="label">Latin — lowercase</div>
+  <div class="rali alphabet">a b c d e f g h i j k l m n o p q r s t u v w x y z</div>
+</div>
+
+<div class="block">
+  <div class="label">Latin — uppercase</div>
+  <div class="rali alphabet">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</div>
+</div>
+
+<!-- Cyrillic -->
+<div class="block">
+  <div class="label">Кирилица — малки букви</div>
+  <div class="rali cyrillic">а б в г д е ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ь ю я, ѝ ы э</div>
+</div>
+
+<div class="block">
+  <div class="label">Кирилица — главни букви</div>
+  <div class="rali cyrillic">А Б В Г Д Е Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ь Ю Я, Ѝ Ы Э</div>
+</div>
+
+<!-- Digits & punctuation -->
+<div class="block">
+  <div class="label">Цифри</div>
+  <div class="rali digits-row">0 1 2 3 4 5 6 7 8 9</div>
+</div>
+
+<div class="block">
+  <div class="label">Пунктуация и символи</div>
+  <div class="rali punct-row">. , : ; ! ? ( ) " ' — – - &amp;  „ “ ” … ‘ ’ @ № € + - = / \ | * ` ~ ! _ </div>
+</div>
+
+<div class="block">
+  <div class="label">Допълнителна пунктуация и символи</div>
+  <div class="rali punct-row">№5 #5 $20 30% x^2 8*9 8€, 1&lt;5, 7&gt;6 “dr” email@address.com 33°C  ©My©Name® Is™
+  </div>
+</div>
+
+<!-- Sentences -->
+<div class="block">
+  <div class="label">Изречение — латиница</div>
+  <div class="rali sentence">The quick brown fox jumps over the lazy dog.</div>
+  <div class="rali sentence">
+At the local café, the owner’s fiancé—a naïve but coöperative man—exclaimed: ‘Look at the façade of this building!’ He then checked his résumé, which was 100% complete & cost $50; it was a total cliché.
+</div>
+</div>
+
+<div class="block">
+  <div class="label">Изречение — кирилица</div>
+  <div class="rali sentence-bg">Жълтата котка прескочи над мързеливото куче… Ах, чудна българска земьо, полюшвай цъфтящи жита. Бързият жълт щъркел кацна върху чуждия двор.</div>
+  <div class="rali sentence-bg"> …</div>
+  <div class="rali sentence-bg">„Эти рыболовы поймали в реке крупных экземпляров осетров, но забыли сфотографироваться на память.“</div>
+</div>
+
+<div class="block">
+  <div class="label">Смесен текст / mixed</div>
+  <div class="rali mixed">
+    Rali Bulgarian Light 1976 - Шрифт — Ver. 1.6<br>
+    Font design by Vera Danova - Дизайн: Вера Данова<br>
+    1 234 567 890 - (100) - (тест!)
+  </div>
+</div>
+
+<!-- Size cascade -->
+<div class="block">
+  <div class="label">Размери / sizes</div>
+  <div class="size-row">
+    <div><span class="size-label">12px</span> <span class="rali s12">Rali Bulgarian Light — Рали Български Лайт 1234567890</span></div>
+    <div><span class="size-label">16px</span> <span class="rali s16">Rali Bulgarian Light — Рали Български Лайт 1234567890</span></div>
+    <div><span class="size-label">24px</span> <span class="rali s24">Rali Bulgarian Light — Рали 1234567890</span></div>
+    <div><span class="size-label">36px</span> <span class="rali s36">Rali Bulgarian Light — Рали</span></div>
+    <div><span class="size-label">48px</span> <span class="rali s48">Rali Bulgarian Light</span></div>
+    <div><span class="size-label">72px</span> <span class="rali s72">Rali 2026</span></div>
+  </div>
+</div>
+
+<!-- Live input -->
+<div class="block">
+  <div class="label">Напишете нещо / live input</div>
+  <textarea class="custom rali" placeholder="Напишете свой текст тук…"></textarea>
+</div>
+
+</body>
+</html>
