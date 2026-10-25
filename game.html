@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра с JavaScript</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page-grid">
+
+    <aside>
+	  <h2>Уеб проект</h2>
+
+	  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Покажи меню">☰</button>
+
+	  <nav>
+		<ul>
+		  <li class="nav-section-start"><a href="index.html">Начало</a></li>
+		  <li><a href="ai.html">AI промпт</a></li>
+		  <li><a href="cyrillic.html">Кирилица</a></li>
+		  <li><a href="fonts.html">Шрифтове</a></li>
+		  <li class="nav-section-start"><a href="cors.html">CORS</a></li>
+		  <li><a href="game.html">Typing Defender</a></li>
+		  <li class="nav-section-start"><a href="about.html">За нас</a></li>
+		</ul>
+	  </nav>
+	</aside>
+
+    <header class="site-header" id="top">
+        <img src="images/logo.svg" alt="Лого на проекта" class="logo">
+        <div>
+            <h1>Статичен уеб сайт</h1>
+            <p>HTML, CSS Grid, JavaScript, адаптивен дизайн и български вариант на кирилицата</p>
+        </div>
+    </header>
+
+    <main>
+		<h2 class="page-title">Играта Typing Defender</h2>
+
+		<section class="card">
+			<p>
+				Като пример за възможностите на vibe coding по-долу е вградена игра, подобна на стара игра за операционната система DOS за упражняване на бързо писане. В промпта поискахме играта да има възможност за избор от три езика. Тя е представена в оригиналния вид, в който е генерирана от Claude Sonnet 4.6, с минимални корекции – поправени са някои неправилно генерирани думи (напр. „заяк“, вместо правилното „заек“) и са добавени по-дълги думи в списъците, дефинирани в HTML кода на страницата.
+				Речникът беше проверен с помощта на ChatGPT 5.5, който според личните ми наблюдения към момента се справя най-добре с езикови задачи на български, английски и немски език.
+			</p>
+		</section>
+        <iframe 
+			src="typing_defender_multilang_v2.html"
+			class="game-frame"
+			title="Игра от Claude">
+		</iframe>
+
+    </main>
+
+    <footer class="site-footer">
+        Проект по дисциплината „Дизайн и публикуване в интернет“, © 2026
+    </footer>
+
+    <a href="#top" class="back-to-top" aria-label="Върни се в началото">↑</a>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

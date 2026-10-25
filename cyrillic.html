@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кирилица</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page-grid">
+
+    <aside>
+	  <h2>Уеб проект</h2>
+
+	  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Покажи меню">☰</button>
+
+	  <nav>
+		<ul>
+		  <li class="nav-section-start"><a href="index.html">Начало</a></li>
+		  <li><a href="ai.html">AI промпт</a></li>
+		  <li><a href="cyrillic.html">Кирилица</a></li>
+		  <li><a href="fonts.html">Шрифтове</a></li>
+		  <li class="nav-section-start"><a href="cors.html">CORS</a></li>
+		  <li><a href="game.html">Typing Defender</a></li>
+		  <li class="nav-section-start"><a href="about.html">За нас</a></li>
+		</ul>
+	  </nav>
+	</aside>
+
+    <header class="site-header" id="top">
+        <img src="images/logo.svg" alt="Лого на проекта" class="logo">
+        <div>
+            <h1>Статичен уеб сайт</h1>
+            <p>HTML, CSS Grid, JavaScript, адаптивен дизайн и български вариант на кирилицата</p>
+        </div>
+    </header>
+
+    <main>
+        <h2 class="page-title display-title">Българска форма на кирилицата</h2>
+
+        <section class="card">
+            <h2>Какво означава това?</h2>
+
+            <p>
+                Някои шрифтове показват кирилицата с руска или обща славянска форма.
+                При българската форма някои букви, например „д“, „т“, „г“ и „л“,
+                изглеждат по-близо до начина, по който сме свикнали да ги виждаме
+                в български текстове.
+            </p>
+
+            <p>
+                За да може браузърът да използва българските форми на буквите,
+                в HTML документа е зададен атрибутът <code>lang="bg"</code>.
+				Когато използваният шрифт поддържа българска локализация, браузърът може автоматично да избере съответните форми.
+				Някои шрифтове използват българските форми по подразбиране, докато при други те се активират чрез OpenType функции и локализацията на езика.
+				Трети шрифтове изобщо не поддържат българска форма на кирилицата.
+            </p>
+        </section>
+
+		<section class="card">
+			<h2>Примери</h2>
+			
+			<p>
+				Файлове с разширения .jpg и .jpeg съдържат компресирани изображения.
+				Размерът трябва да е подходящ за Уеб.
+			</p>
+			<div class="image-grid">
+				<img src="images/fonts-example-nobg.jpg" alt="Пример за шрифтове">
+				<img src="images/fonts-example-bg.jpg" alt="Пример за шрифтове">
+			</div>
+		</section>
+
+        <section class="card">
+            <h2>Откъде можем да намерим подходящи шрифтове?</h2>
+
+            <ul>
+                <li>Google Fonts</li>
+                <li>localfonts.eu</li>
+                <li>1001fonts.com</li>
+            </ul>
+
+            <p>
+                Важно е да се проверява лицензът на шрифта. Ако пише
+                „free for personal use only“, не е добра идея шрифтът да се
+                разпространява публично като част от проект.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Как включваме шрифт в статичен сайт?</h2>
+
+            <p>
+                В този проект шрифтът е включен чрез <code>@import</code> в CSS файла,
+				тъй като е част от библиотеката на Google Fonts:
+            </p>
+
+            <div class="code">@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;700&family=Unbounded:wght@700;900&display=swap');
+
+body {
+    font-family: 'Sofia Sans', Arial, sans-serif;
+}</div>
+			<p>
+                Освен това, в CSS файла е добавен и свободен шрифт от библиотеката на Гугъл,
+				който се зарежда директно от файловете на сайта като пример за правилното ползване заради GDPR (според Google AI).
+				По този начин се ползват и други шрифтове, чиито source файл е качен на нашия сървър.
+            </p>
+
+            <div class="code">@font-face {
+    font-family: "Cormorant Infant";
+	src: url('fonts/Cormorant_Infant/CormorantInfant-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.display-title {
+    font-family: "Cormorant Infant";
+    color: #4f5fa8;
+    letter-spacing: 0.04em;
+}
+			
+			</div>
+        </section>
+		
+		<section class="card">
+            <p>
+                Още за българската форма на кирилицата можете да прочетете тук 
+				<a href="https://medium.com/@mevbg/bulgarian-cyrillic-on-the-web-techniques-for-authentic-font-rendering-bec82c24e39f" target="_blank" rel="noopener noreferrer">
+					Българска кирилица в интернет<img src="images/external-link.svg" alt="Отвори в нов таб" class="ext-icon"></a>
+				и тук <a href="https://cyrillic.bg/manifest/" target="_blank" rel="noopener noreferrer">Манифест на инициативата<img src="images/external-link.svg" alt="Отвори в нов таб" class="ext-icon"></a>
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        Проект по дисциплината „Дизайн и публикуване в интернет“, © 2026
+    </footer>
+
+    <a href="#top" class="back-to-top" aria-label="Върни се в началото">↑</a>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
